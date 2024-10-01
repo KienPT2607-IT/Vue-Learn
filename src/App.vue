@@ -1,47 +1,72 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+<script>
+import ModalOne from './components/ModalOne.vue';
+
+export default {
+  data() {
+    return {
+      title: 'My very first Vue app',
+      header: 'Sign up for the giveaway',
+      text: 'Grab your ninja swag for half price',
+      theme: 'sale',
+      showModal: false,
+      showModalTwo: false,
+    };
+  },
+
+  methods: {
+    handleClick() {
+      console.log(this.$refs.name);
+    },
+    toggleModal() {
+      this.showModal = !this.showModal;
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo;
+    },
+  },
+
+  components: {
+    ModalOne,
+  },
+};
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>{{ title }}</h1>
+  <p>Welcome ...</p>
+  <teleport to=".modals" v-if="showModal">
+    <ModalOne :theme="theme" @close="toggleModal">
+      <template v-slot:links>
+        <a href="#">Sign up now</a>
+        <a href="#">More info</a>
+      </template>
+      <h1>Ninja Giveaway</h1>
+      <p>Grab your ninj aswag for half price</p>
+    </ModalOne>
+  </teleport>
+  <div v-if="showModalTwo">
+    <ModalOne @close="toggleModalTwo">
+      <h1>Sign up to the newsletter</h1>
+      <p>For updates and promo codes!</p>
+    </ModalOne>
+  </div>
+  <button @click="toggleModal">Open modal</button>
+  <button @click="toggleModalTwo">Open modal 2</button>
+  <!-- <input type="text" ref="name" />
+  <button @click="handleClick">Click me</button> -->
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<style>
+#app,
+.modals {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+h1 {
+  border-bottom: 1p solid #ddd;
+  display: inline-block;
+  padding-bottom: 10px;
 }
 </style>
