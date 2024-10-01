@@ -1,7 +1,8 @@
 <script>
 // import ModalOne from './components/ModalOne.vue';
-import PlayBlock from './components/PlayBlock.vue';
-import GameResult from './components/GameResult.vue';
+// import PlayBlock from './components/PlayBlock.vue';
+// import GameResult from './components/GameResult.vue';
+import SignUpForm from './components/SignUpForm.vue';
 
 export default {
   data() {
@@ -45,8 +46,9 @@ export default {
 
   components: {
     // ModalOne,
-    PlayBlock,
-    GameResult,
+    // PlayBlock,
+    // GameResult,
+    SignUpForm,
   },
 };
 </script>
@@ -54,9 +56,13 @@ export default {
 <template>
   <h1>{{ title }}</h1>
   <p></p>
-  <button @click="startGame" :disabled="isPlaying">Play</button>
+  <SignUpForm />
+
+  <!-- * 3 -->
+  <!-- <button @click="startGame" :disabled="isPlaying">Play</button>
   <PlayBlock v-if="isPlaying" :delay="delay" @end="endGame" />
-  <GameResult v-if="showResult" :score="score" />
+  <GameResult v-if="showResult" :score="score" /> -->
+
   <!-- * 2 -->
   <!-- <p>Welcome ...</p>
   <teleport to=".modals" v-if="showModal">
